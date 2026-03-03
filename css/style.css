@@ -1,0 +1,40 @@
+body {
+    background-image:url("../img/background.png");
+}
+
+.gradiant{
+    background: linear-gradient(blue,darkblue,blue);
+    color:white;
+}
+
+.papa{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 30px;
+}
+
+.block{
+    border: solid black 6px;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.timer{
+    height: 15vh;
+    width:50vw;
+}
+.streak{
+    height: 15vh;
+    width: 15vw;
+}
+.rekenSectie{
+    height:60vh;
+    width:50vw;
+}
+.raket{ 
+    height:60vh;
+    width:15vw;
+}
