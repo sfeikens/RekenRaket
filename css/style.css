@@ -1,74 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --space-dark:    #020818;
+    --space-mid:     #050d2e;
+    --panel-bg:      rgba(5, 15, 60, 0.85);
+    --panel-border:  rgba(80, 140, 255, 0.5);
+    --glow-blue:     #3a7fff;
+    --glow-cyan:     #00d4ff;
+    --accent:        #ff6b35;
+    --text-bright:   #e8f4ff;
+    --text-dim:      #7aa8d0;
+}
+
 body {
-    background-image:url("../img/background.png");
-}
-
-.gradiant, li{
-    background: linear-gradient(blue,darkblue,blue);
-    color:white;
-}
-
-.papa{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    background-image: url("../img/background.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Exo 2', sans-serif;
+    color: var(--text-bright);
     min-height: 100vh;
-    gap: 30px;
+    overflow-x: hidden;
 }
 
-.block{
-    border: solid black 6px;
-    border-radius: 3px;
-    padding: 5px;
-}
-
-.timer{
-    height: 15vh;
-    width:  50vw;
-}
-.streak{
-    height: 15vh;
-    width: 15vw;
-}
-.rekenSectie{
-    height:60vh;
-    width:50vw;
-}
-
-.som{
-    margin:10px;
-    padding: 10px;
-    border:solid black 4px;
-    border-radius: 4px;
-    background: radial-gradient(rgb(3, 3, 139),rgb(2, 2, 94));
-}
-
-.antwoordenlijst{
-    border: solid black 4px;
-    border-radius: 4px;
-    padding:0px;
-    margin:10px;
-    height:47.5vh;
-    list-style: none;
-    background: radial-gradient(rgb(3, 3, 139),rgb(2, 2, 94));
-    
+/* HEADER */
+header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, rgba(2,8,24,0.95), rgba(5,15,60,0.9));
+    border-bottom: 1px solid var(--panel-border);
+    backdrop-filter: blur(12px);
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
-    min-height: 47.5vh;
-    min-width: 47.5vw;
-    gap: 10px;
+    gap: 12px;
 }
 
-li{
-    border:solid black 4px;
-    width:20vw;
-    height:16vh;
-    margin:auto;
+header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #00d4ff, #3a7fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.raket{ 
-    height:60vh;
-    width:15vw;
+/* MAIN LAYOUT */
+.papa {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "timer   streak  raket"
+        "rekenen rekenen raket";
+    gap: 16px;
+    padding: 90px 32px 32px;
+    min-height: 100vh;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+}
+
+/* PANEL BASE */
+.block {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow:
+        0 0 20px rgba(58, 127, 255, 0.15),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* TIMER */
+.timer {
+    grid-area: timer;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.timer p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: #00d4ff;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    letter-spacing: 0.1em;
+}
+
+/* STREAK */
+.streak {
+    grid-area: streak;
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+}
+
+.streak p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+/* REKEN SECTIE */
+.rekenSectie {
+    grid-area: rekenen;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.som {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--panel-border);
+    background: rgba(0, 212, 255, 0.04);
+}
+
+.som p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-bright);
+    letter-spacing: 0.05em;
+}
+
+/* ANSWER LIST */
+.antwoordenlijst {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 16px;
+    flex: 1;
+}
+
+li {
+    background: rgba(10, 25, 80, 0.7);
+    border: 1px solid rgba(80, 140, 255, 0.35);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    font-weight: 700;
+    color: var(--text-bright);
+    text-align: center;
+    transition: all 0.2s ease;
+    min-height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+li:hover {
+    border-color: #00d4ff;
+    background: rgba(0, 212, 255, 0.12);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
+    transform: translateY(-2px);
+    color: #00d4ff;
+}
+
+li:active {
+    transform: scale(0.98);
+}
+
+/* RAKET */
+.raket {
+    grid-area: raket;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    min-width: 160px;
+}
+
+.raket img {
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.5));
+}
+.raket:hover img {
+    animation: hover-float 3s ease-in-out infinite;
+}
+
+@keyframes hover-float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
 }
