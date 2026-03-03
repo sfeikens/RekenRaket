@@ -96,7 +96,7 @@ header h1 {
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: 700;
     color: #00d4ff;
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
     letter-spacing: 0.1em;
 }
 
@@ -132,6 +132,10 @@ header h1 {
     padding: 20px 24px;
     border-bottom: 1px solid var(--panel-border);
     background: rgba(0, 212, 255, 0.04);
+    /*zorgt ervoor dat de gebruiker de text niet kan highliten*/
+    -webkit-user-select: none;
+    -ms-user-select: none; 
+    user-select: none; 
 }
 
 .som p {
