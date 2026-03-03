@@ -2,7 +2,7 @@ body {
     background-image:url("../img/background.png");
 }
 
-.gradiant{
+.gradiant, li{
     background: linear-gradient(blue,darkblue,blue);
     color:white;
 }
@@ -24,7 +24,7 @@ body {
 
 .timer{
     height: 15vh;
-    width:50vw;
+    width:  50vw;
 }
 .streak{
     height: 15vh;
@@ -34,6 +34,40 @@ body {
     height:60vh;
     width:50vw;
 }
+
+.som{
+    margin:10px;
+    padding: 10px;
+    border:solid black 4px;
+    border-radius: 4px;
+    background: radial-gradient(rgb(3, 3, 139),rgb(2, 2, 94));
+}
+
+.antwoordenlijst{
+    border: solid black 4px;
+    border-radius: 4px;
+    padding:0px;
+    margin:10px;
+    height:47.5vh;
+    list-style: none;
+    background: radial-gradient(rgb(3, 3, 139),rgb(2, 2, 94));
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 47.5vh;
+    min-width: 47.5vw;
+    gap: 10px;
+}
+
+li{
+    border:solid black 4px;
+    width:20vw;
+    height:16vh;
+    margin:auto;
+}
+
 .raket{ 
     height:60vh;
     width:15vw;
