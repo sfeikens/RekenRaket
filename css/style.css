@@ -87,8 +87,8 @@ footer p{
 }
 
 /* MAIN LAYOUT */
-.papa {
-    display: grid;
+main {
+    display: none; /* Deze wordt omgezet naar grid wanneer de gameloop start*/
     grid-template-columns: 1fr auto auto;
     grid-template-rows: auto 1fr;
     grid-template-areas:
