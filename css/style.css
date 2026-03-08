@@ -151,7 +151,7 @@ main {
 }
 
 /* REKEN SECTIE */
-.rekenSectie {
+.reken_sectie {
     grid-area: rekenen;
     padding: 0;
     overflow: hidden;

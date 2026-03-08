@@ -1,0 +1,17 @@
+WebGame
+├── css
+│   └── style.css
+├── img
+│   ├── background.png
+│   ├── iu.ico
+│   └── iu.png
+├── index.html
+├── js
+│   └── gameloop.js
+├── NietCode
+│   ├── project_document.docx
+│   └── wireframeRekenRocket.pdf
+├── README.md
+└── structure.txt
+
+5 directories, 10 files
