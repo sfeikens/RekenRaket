@@ -6,13 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let user_ans = "";
     let user_score = 0;
     let user_streak = 0;
+    let rocketPosition = 0;
+    const MAX_ROCKET_POSITION = -200; // Maximum upward movement
+    const MIN_ROCKET_POSITION = 0; // Minimum position (at the bottom)
 
-    const start_button = document.querySelector("header div button");
+
+
+    const start_button = document.querySelector("button");
     const timer_element = document.querySelector("section.timer p");
     const main_element = document.querySelector("main");
     const som_element = document.querySelector("section div.som p");
     const ans_elements = document.querySelectorAll("li");
     const streak_element = document.querySelector("section.streak p");
+    const rocket_img = document.querySelector(".raket img");
 
 
     function get_input() {
@@ -63,21 +69,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function process_click(element) {
         user_ans = element.innerText;
-        console.log("User answer:", user_ans); // Voor debuggen
+        console.log("User answer:", user_ans);
         console.log("Correct answer:", som_ans);
-        
+
         // Disable buttons to prevent additional clicks
         ans_elements.forEach(ans => ans.style.pointerEvents = 'none');
-        
+
         if (parseInt(user_ans) === som_ans) {
             user_score++;
             user_streak++;
             streak_element.innerText = "🔥 Streak: " + user_streak;
+
+            // Move the rocket up for correct answer
+            moveRocketUp();
         } else {
             user_streak = 0;
             streak_element.innerText = "🔥 Streak: 0";
+
+            // Move the rocket down for incorrect answer
+            moveRocketDown();
         }
-        
+
         // Add a brief delay before refreshing the game to show feedback
         setTimeout(() => {
             refresh_game();
@@ -89,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function new_equation() {
-        som = `${get_rnd_int(1, 10)} ${get_operator()} ${get_rnd_int(1, 10)}`;
+        som = `${get_rnd_int(1, 10+user_streak)} ${get_operator()} ${get_rnd_int(1, 10+user_streak)}`;
         som_ans = eval(som); // Can be a security risk; ensure inputs are sanitized if needed
         console.log("Generated equation:", som);
         console.log("Calculated answer:", som_ans);
@@ -103,6 +115,39 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         ans_elements[get_rnd_int(0,3)].innerText = som_ans;
     }
+
+
+    function moveRocketUp() {
+        if (rocketPosition > MAX_ROCKET_POSITION) {
+            let targetPos = rocketPosition - 20; // Target position to move up
+            const id = setInterval(() => {
+                if (rocketPosition <= targetPos || rocketPosition <= MAX_ROCKET_POSITION) {
+                    clearInterval(id);
+                    rocketPosition = Math.max(rocketPosition, MAX_ROCKET_POSITION); // Ensure it doesn't exceed max
+                } else {
+                    rocketPosition--; // Move up
+                    rocket_img.style.transform = `translateY(${rocketPosition}px)`; // Adjust position
+                }
+            }, 5);
+        }
+    }
+
+
+    function moveRocketDown() {
+        if (rocketPosition < MIN_ROCKET_POSITION) {
+            let targetPos = rocketPosition + 20; // Target position to move down
+            const id = setInterval(() => {
+                if (rocketPosition >= targetPos || rocketPosition >= MIN_ROCKET_POSITION) {
+                    clearInterval(id);
+                    rocketPosition = Math.min(rocketPosition, MIN_ROCKET_POSITION); // Ensure it doesn't go below min
+                } else {
+                    rocketPosition++; // Move down
+                    rocket_img.style.transform = `translateY(${rocketPosition}px)`; // Adjust position
+                }
+            }, 5);
+        }
+    }
+
 
     function get_rnd_int(min, max, cannot_be = null) {
         let returnvalue;

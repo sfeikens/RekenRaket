@@ -86,6 +86,35 @@ footer p{
     user-select: none; 
 }
 
+.hide_inside_gameloop {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.hide_inside_gameloop button {
+    padding: 20px 40px;
+    font-size: 1.5rem;
+    color: #fff;
+    background: linear-gradient(90deg, blue, rgb(49, 41, 207)); 
+    border:solid 3px var(--space-mid);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.hide_inside_gameloop button:hover {
+    border-color: #3a7fff;
+    transform: scale(1.05); 
+}
+
+
 /* MAIN LAYOUT */
 main {
     display: none; /* Deze wordt omgezet naar grid wanneer de gameloop start*/
@@ -222,25 +251,38 @@ li:active {
 
 /* RAKET */
 .raket {
+    position: relative;
     grid-area: raket;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items:center;
     padding: 16px;
     min-width: 160px;
+    min-height: 436px;
 }
 
 .raket img {
+    top:50%;
+    position: absolute;
     width: 100%;
     max-width: 130px;
-    height: auto;
+    height: 45%;
     filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.5));
 }
-.raket:hover img {
-    animation: hover-float 3s ease-in-out infinite;
+
+.scoreboard_div {
+    background: radial-gradient(circle, var(--glow-blue), var(--space-mid));
+    border: solid 3px var(--space-dark);
+    border-radius: 3px;
+    padding: 10px;
+    min-width: 400px;
+    display:block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the div */
+    z-index: 200; /* Ensure it appears above other elements */
 }
 
-@keyframes hover-float {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-12px); }
+.scoreboard_div button {
+    align-self: center;
 }
