@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const rocket_img = document.querySelector(".raket img");
     const scoreboard_element = document.querySelector(".scoreboard_div");
     const scoreboard_paragraph_elements = document.querySelectorAll(".scoreboard_div p");
-    const retry_button = document.querySelector("div button");
+    const retry_button = document.querySelector("button.retry");
 
 
     function get_input() {
@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Show main content and hide the start button
         scoreboard_element.style.display = "none";
+        start_button.style.display = "none";
         main_element.style.display = "grid";
 
         const timer_func = window.setInterval(function() {
