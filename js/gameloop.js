@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let user_ans = "";
     let user_score = 0;
     let user_streak = 0;
+    let user_highest_streak = 0;
+    let user_unscore = 0;
     let rocketPosition = 0;
     const MAX_ROCKET_POSITION = -200; // Maximum upward movement
     const MIN_ROCKET_POSITION = 0; // Minimum position (at the bottom)
@@ -19,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const ans_elements = document.querySelectorAll("li");
     const streak_element = document.querySelector("section.streak p");
     const rocket_img = document.querySelector(".raket img");
+    const scoreboard_element = document.querySelector(".scoreboard_div");
+    const scoreboard_paragraph_elements = document.querySelectorAll(".scoreboard_div p");
+    const retry_button = document.querySelector("div button");
 
 
     function get_input() {
@@ -36,14 +41,26 @@ document.addEventListener("DOMContentLoaded", () => {
     if (start_button) {
         start_button.addEventListener("click", start_timer);
     }
+    
+    if (retry_button) {
+        retry_button.addEventListener("click", start_timer);
+    }
 
     function start_timer() {
-        let timer = 60;
+        // Reset game state
+        user_score = 0;
+        user_streak = 0;
+        user_highest_streak = 0;
+        user_unscore = 0;
+        rocketPosition = 0; 
+        let timer = 10;
+        timer_element.innerText = timer; // Reset timer display
+
         in_loop = true;
         refresh_game();
 
         // Show main content and hide the start button
-        start_button.style.display = "none";
+        scoreboard_element.style.display = "none";
         main_element.style.display = "grid";
 
         const timer_func = window.setInterval(function() {
@@ -53,9 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 clearInterval(timer_func);
                 in_loop = false;
-                
+
                 // Restore the original state once the timer ends
-                start_button.style.display = "grid";
+                update_scoreboard();
+                scoreboard_element.style.display = "block";
                 main_element.style.display = "none";
             }
         }, 1000);
@@ -78,11 +96,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (parseInt(user_ans) === som_ans) {
             user_score++;
             user_streak++;
+            if (user_highest_streak<user_streak){
+                user_highest_streak = user_streak;
+            }
             streak_element.innerText = "🔥 Streak: " + user_streak;
 
             // Move the rocket up for correct answer
             moveRocketUp();
         } else {
+            user_unscore++;
             user_streak = 0;
             streak_element.innerText = "🔥 Streak: 0";
 
@@ -114,6 +136,13 @@ document.addEventListener("DOMContentLoaded", () => {
             ans_elements[i].innerText = som_ans+get_rnd_int(-10,10,0);
         }
         ans_elements[get_rnd_int(0,3)].innerText = som_ans;
+    }
+
+    function update_scoreboard(){
+        scoreboard_paragraph_elements[0].innerText = `Final score: ${user_score}`;
+        scoreboard_paragraph_elements[1].innerText = `Highest streak: ${user_highest_streak}`;
+        scoreboard_paragraph_elements[2].innerText = `Current streak: ${user_streak}`;
+        scoreboard_paragraph_elements[3].innerText = `Wrong answers: ${user_unscore}`;
     }
 
 

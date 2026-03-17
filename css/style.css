@@ -275,7 +275,7 @@ li:active {
     border-radius: 3px;
     padding: 10px;
     min-width: 400px;
-    display:block;
+    display:none;
     position: fixed;
     top: 50%;
     left: 50%;
