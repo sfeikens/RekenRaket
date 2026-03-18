@@ -279,10 +279,29 @@ li:active {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centers the div */
-    z-index: 200; /* Ensure it appears above other elements */
+    transform: translate(-50%, -50%); 
+    z-index: 200; 
+    flex-direction: column;
+    gap: 8px; 
+
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+.scoreboard_div.show { display: flex; }
+
+.scoreboard_div p {
+    font-family: 'Orbitron', sans-serif;
+    color:white;
+    text-shadow: 0 0 30px rgb(0, 0, 0)
 }
 
 .scoreboard_div button {
     align-self: center;
+    background:radial-gradient(var(--glow-blue), var(--text-dim));
+    color:white;
+    padding: 5px;
+    font-family:'Orbitron', sans-serif;
+    border: 5px, solid;
+    border-color: var(--space-mid);
 }

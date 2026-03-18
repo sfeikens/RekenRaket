@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         refresh_game();
 
         // Show main content and hide the start button
-        scoreboard_element.style.display = "none";
+        scoreboard_element.classList.remove('show')
         start_button.style.display = "none";
         main_element.style.display = "grid";
 
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Restore the original state once the timer ends
                 update_scoreboard();
-                scoreboard_element.style.display = "block";
+                scoreboard_element.classList.add('show');
                 main_element.style.display = "none";
             }
         }, 1000);
@@ -140,10 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function update_scoreboard(){
-        scoreboard_paragraph_elements[0].innerText = `Final score: ${user_score}`;
-        scoreboard_paragraph_elements[1].innerText = `Highest streak: ${user_highest_streak}`;
-        scoreboard_paragraph_elements[2].innerText = `Current streak: ${user_streak}`;
-        scoreboard_paragraph_elements[3].innerText = `Wrong answers: ${user_unscore}`;
+        scoreboard_paragraph_elements[0].innerText = `Final score: ${user_score}\n`;
+        scoreboard_paragraph_elements[1].innerText = `Highest streak: ${user_highest_streak}\n`;
+        scoreboard_paragraph_elements[2].innerText = `Current streak: ${user_streak}\n`;
+        scoreboard_paragraph_elements[3].innerText = `Wrong answers: ${user_unscore}\n`;
     }
 
 
